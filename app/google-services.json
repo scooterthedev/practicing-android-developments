@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "323946003612",
+    "project_id": "android-learning-4092f",
+    "storage_bucket": "android-learning-4092f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323946003612:android:3bb23ad7a937ccf4c60159",
+        "android_client_info": {
+          "package_name": "ca.scooter.androidpractice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXahgjyzUAIbgxXMzSvP4lrZodqZHn0dU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
