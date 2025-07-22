@@ -15,7 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import ca.scooter.androidpractice.databinding.ActivitySetupPageBinding;
 
-public class Setup_Page extends AppCompatActivity {
+public class setup_page extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivitySetupPageBinding binding;

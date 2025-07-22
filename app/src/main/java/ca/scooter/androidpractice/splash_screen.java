@@ -37,19 +37,16 @@ public class splash_screen extends AppCompatActivity {
             SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
             boolean isFirstTime = prefs.getBoolean(KEY_FIRST_LAUNCH, true);
 
-            //This is for if the user isn't authed
-            if (currentUser == null) {
-                Intent intent = new Intent(splash_screen.this, LoginActivity.class);
-                intent.putExtra("NEEDS_AUTH", true);
+            if (isFirstTime) {
+                Intent intent = new Intent(splash_screen.this, setup_page.class);
+                startActivity(intent);
+                intent.putExtra("IS_FIRST_TIME", true);
                 startActivity(intent);
             } else {
                 Intent intent = new Intent(splash_screen.this, MainActivity.class);
-                intent.putExtra("IS_FIRST_TIME", isFirstTime);
                 startActivity(intent);
-
-                if (isFirstTime) {
-                    prefs.edit().putBoolean(KEY_FIRST_LAUNCH, false).apply();
-                }
+                intent.putExtra("NEEDS_AUTH", false);
+                startActivity(intent);
             }
             finish();
         }, SPLASH_DELAY);

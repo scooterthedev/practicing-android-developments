@@ -12,11 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidPractice">
         <activity
+            android:name=".setup_page"
+            android:exported="false"
+            android:theme="@style/Theme.AndroidPractice" />
+        <activity
             android:name=".Setup_Page"
             android:exported="false"
             android:theme="@style/Theme.AndroidPractice" />
         <activity
-            android:name=".auth.LoginActivity"
+            android:name=".auth.ui.login.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login" />
         <activity
@@ -30,7 +34,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>

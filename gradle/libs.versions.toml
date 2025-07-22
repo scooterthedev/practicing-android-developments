@@ -13,9 +13,11 @@ navigationFragment = "2.9.2"
 navigationUi = "2.9.2"
 activity = "1.10.1"
 annotation = "1.9.1"
+fragment = "1.8.8"
 
 [libraries]
 com-google-gms-google-services-gradle-plugin = { module = "com.google.gms.google-services:com.google.gms.google-services.gradle.plugin", version.ref = "comGoogleGmsGoogleServicesGradlePlugin" }
+fragment-ktx = { module = "androidx.fragment:fragment-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -28,6 +30,7 @@ navigation-fragment = { group = "androidx.navigation", name = "navigation-fragme
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
+fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
