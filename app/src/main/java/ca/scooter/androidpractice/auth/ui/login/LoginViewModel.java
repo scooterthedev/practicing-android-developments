@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
+import ca.scooter.androidpractice.R;
 import ca.scooter.androidpractice.auth.data.LoginRepository;
 import ca.scooter.androidpractice.auth.data.Result;
 import ca.scooter.androidpractice.auth.data.model.LoggedInUser;
-import ca.scooter.androidpractice.auth.R;
 
 public class LoginViewModel extends ViewModel {
 

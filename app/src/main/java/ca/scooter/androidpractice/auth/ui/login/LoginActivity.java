@@ -22,9 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ca.scooter.androidpractice.auth.R;
-import ca.scooter.androidpractice.auth.ui.login.LoginViewModel;
-import ca.scooter.androidpractice.auth.ui.login.LoginViewModelFactory;
+import ca.scooter.androidpractice.R;
 import ca.scooter.androidpractice.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
