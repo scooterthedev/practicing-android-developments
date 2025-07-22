@@ -53,4 +53,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
     implementation libs.fragment.ktx
+    implementation(libs.core.splashscreen)
 }

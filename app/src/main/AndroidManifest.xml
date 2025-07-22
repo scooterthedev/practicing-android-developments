@@ -12,11 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidPractice">
         <activity
-            android:name=".setup_page"
-            android:exported="false"
-            android:theme="@style/Theme.AndroidPractice" />
+            android:name=".LoginActivity"
+            android:exported="false" />
         <activity
-            android:name=".Setup_Page"
+            android:name=".HomeScreen"
+            android:exported="false"
+            android:label="@string/title_activity_home_screen"
+            android:theme="@style/Theme.AndroidPractice.NoActionBar" />
+        <activity
+            android:name=".setup_page"
             android:exported="false"
             android:theme="@style/Theme.AndroidPractice" />
         <activity
