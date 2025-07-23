@@ -1,8 +1,14 @@
 package ca.scooter.androidpractice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -19,13 +25,16 @@ import ca.scooter.androidpractice.databinding.ActivityHomeScreenBinding;
 public class HomeScreen extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private ActivityHomeScreenBinding binding;
+
+    public static final String GITHUB_USERNAME = "ca.scooter.androidpractice.GITHUB_USERNAME";
+    public static final String GITHUB_EMAIL = "ca.scooter.androidpractice.GITHUB_EMAIL";
+    public static final String GITHUB_AVATAR_URL = "ca.scooter.androidpractice.GITHUB_AVATAR_URL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityHomeScreenBinding.inflate(getLayoutInflater());
+        ActivityHomeScreenBinding binding = ActivityHomeScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarHomeScreen.toolbar);
@@ -39,6 +48,27 @@ public class HomeScreen extends AppCompatActivity {
         });
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+
+
+        //nav header stuff
+        View headerView = navigationView.getHeaderView(0);
+        ImageView imageViewGithubAvatar = headerView.findViewById(R.id.imageViewGithubAvatar);
+        TextView textViewGithubUsername = headerView.findViewById(R.id.textViewGitHubUsername);
+        TextView textViewGithubEmail = headerView.findViewById(R.id.textViewGitHubEmail);
+
+        Intent intent = getIntent();
+        String githubUsername = intent.getStringExtra(GITHUB_USERNAME);
+        String githubEmail = intent.getStringExtra(GITHUB_EMAIL);
+        String githubAvatarUrl = intent.getStringExtra(GITHUB_AVATAR_URL);
+
+        textViewGithubUsername.setText(githubUsername);
+        textViewGithubEmail.setText(githubEmail);
+
+        Glide.with(this)
+                .load(githubAvatarUrl)
+                .circleCrop()
+                .into(imageViewGithubAvatar);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(

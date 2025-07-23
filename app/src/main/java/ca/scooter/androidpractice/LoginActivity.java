@@ -31,6 +31,10 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private FirebaseAuth mAuth;
 
+    public static final String GITHUB_USERNAME = "ca.scooter.androidpractice.GITHUB_USERNAME";
+    public static final String GITHUB_EMAIL = "ca.scooter.androidpractice.GITHUB_EMAIL";
+    public static final String GITHUB_AVATAR_URL = "ca.scooter.androidpractice.GITHUB_AVATAR_URL";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,9 +124,22 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null){
             String name = user.getDisplayName();
             String email = user.getEmail();
-            String uid = user.getUid();
-
+            String photoUrlUri = String.valueOf(user.getPhotoUrl());
+            String photoUrl = null;
+            if (photoUrlUri != null){
+                photoUrl = photoUrlUri.toString();
+            }
             Toast.makeText(this, "Signed in as: " + name + " (" + email + ")", Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(LoginActivity.this, HomeScreen.class);
+            intent.putExtra(GITHUB_USERNAME, name);
+            intent.putExtra(GITHUB_EMAIL, email);
+            intent.putExtra(GITHUB_AVATAR_URL, photoUrl);
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+
         } else {
             Toast.makeText(this, "Sign in failed", Toast.LENGTH_LONG).show();
         }
