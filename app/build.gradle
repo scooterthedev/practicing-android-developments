@@ -53,6 +53,7 @@ dependencies {
     implementation libs.firebase.analytics
     implementation libs.firebase.auth
     implementation libs.fragment.ktx
+    implementation libs.firebase.firestore
     implementation(libs.core.splashscreen)
     //Material UI
     implementation libs.google.material

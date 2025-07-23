@@ -3,6 +3,7 @@ agp = "8.11.1"
 comGoogleGmsGoogleServicesGradlePlugin = "4.4.3"
 coreSplashscreen = "1.0.1"
 firebaseBom = "34.0.0"
+firebaseFirestore = "26.0.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -27,6 +28,7 @@ core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = 
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-firestore = { module = "com.google.firebase:firebase-firestore", version.ref = "firebaseFirestore" }
 fragment-ktx = { module = "androidx.fragment:fragment-ktx" }
 google-material = { module = "com.google.android.material:material" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
