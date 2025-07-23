@@ -142,11 +142,17 @@ public class LoginActivity extends AppCompatActivity {
 
         DocumentReference userDocRef = db.collection("users").document(userID);
         userDocRef.set(user)
-                .addOnSuccessListener(aVoid -> {
-                    navigateHome();
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        navigateHome();
+                    }
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(LoginActivity.this, "Failed to save user details. Please try again.", Toast.LENGTH_LONG).show();
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LoginActivity.this, "Failed to save user details. Please try again.", Toast.LENGTH_LONG).show();
+                    }
                 });
             }
             private void navigateHome() {
