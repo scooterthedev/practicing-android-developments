@@ -6,12 +6,16 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
+import android.widget.Toast;
 
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,9 +30,12 @@ public class HomeScreen extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    public static final String GITHUB_USERNAME = "ca.scooter.androidpractice.GITHUB_USERNAME";
-    public static final String GITHUB_EMAIL = "ca.scooter.androidpractice.GITHUB_EMAIL";
-    public static final String GITHUB_AVATAR_URL = "ca.scooter.androidpractice.GITHUB_AVATAR_URL";
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+
+    private ImageView imageViewGithubAvatar;
+    private TextView textViewGithubUsername;
+    private TextView textViewGithubEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,9 @@ public class HomeScreen extends AppCompatActivity {
 
         ActivityHomeScreenBinding binding = ActivityHomeScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         setSupportActionBar(binding.appBarHomeScreen.toolbar);
         binding.appBarHomeScreen.fab.setOnClickListener(new View.OnClickListener() {
@@ -56,18 +66,18 @@ public class HomeScreen extends AppCompatActivity {
         TextView textViewGithubUsername = headerView.findViewById(R.id.textViewGitHubUsername);
         TextView textViewGithubEmail = headerView.findViewById(R.id.textViewGitHubEmail);
 
-        Intent intent = getIntent();
-        String githubUsername = intent.getStringExtra(GITHUB_USERNAME);
-        String githubEmail = intent.getStringExtra(GITHUB_EMAIL);
-        String githubAvatarUrl = intent.getStringExtra(GITHUB_AVATAR_URL);
-
-        textViewGithubUsername.setText(githubUsername);
-        textViewGithubEmail.setText(githubEmail);
-
-        Glide.with(this)
-                .load(githubAvatarUrl)
-                .circleCrop()
-                .into(imageViewGithubAvatar);
+        //loading in the users data from firebase
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null){
+            loadData(currentUser.getUid());
+        } else {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomeScreen.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+            return;
+        }
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -78,6 +88,27 @@ public class HomeScreen extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home_screen);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+    private void loadData(String userID){
+        DocumentReference userDocRef = db.collection("users").document(userID);
+
+        userDocRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                DocumentSnapshot document = task.getResult();
+                if (document != null & document.exists()){
+                    String username = document.getString("username");
+                    String email = document.getString("email");
+                    String avatarUrl = document.getString("avatarUrl");
+
+                    updateUI(username, email, avatarUrl);
+                } else {
+                    Toast.makeText(HomeScreen.this, "What service provider are you using lol, because this service aint working", Toast.LENGTH_LONG).show();
+                    //display defualts when everything is null
+                    updateUI(null, null, null);
+                }
+            }
+        });
     }
 
     @Override
