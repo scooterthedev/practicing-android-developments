@@ -36,7 +36,7 @@ public class HomeScreen extends AppCompatActivity {
     private FirebaseFirestore db;
 
     private ImageView imageViewGithubAvatar;
-    private TextView textViewGithubUsername;
+    private TextView textViewGitHubName;
     private TextView textViewGithubEmail;
 
     @Override
@@ -61,12 +61,9 @@ public class HomeScreen extends AppCompatActivity {
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
-
         //nav header stuff
         View headerView = navigationView.getHeaderView(0);
-        ImageView imageViewGithubAvatar = headerView.findViewById(R.id.imageViewGithubAvatar);
-        TextView textViewGithubUsername = headerView.findViewById(R.id.textViewGitHubUsername);
-        TextView textViewGithubEmail = headerView.findViewById(R.id.textViewGitHubEmail);
+
 
         //loading in the users data from firebase
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -99,11 +96,11 @@ public class HomeScreen extends AppCompatActivity {
             if (task.isSuccessful()){
                 DocumentSnapshot document = task.getResult();
                 if (document != null & document.exists()){
-                    String username = document.getString("username");
+                    String name = document.getString("name");
                     String email = document.getString("email");
                     String avatarUrl = document.getString("avatarUrl");
 
-                    updateUI(username, email, avatarUrl);
+                    updateUI(name, email, avatarUrl);
                 } else {
                     Toast.makeText(HomeScreen.this, "What service provider are you using lol, because this service aint working", Toast.LENGTH_LONG).show();
                     //display defualts when everything is null
@@ -117,11 +114,16 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void updateUI(String username, String email, String avatarUrl){
-        if (username != null && !username.isEmpty()){
-            textViewGithubUsername.setText(username);
+    private void updateUI(String name, String email, String avatarUrl){
+
+        ImageView imageViewGithubAvatar = findViewById(R.id.imageViewGithubAvatar);
+        TextView textViewGithubName = findViewById(R.id.textViewName);
+        TextView textViewGithubEmail = findViewById(R.id.textViewGitHubEmail);
+
+        if (name != null && !name.isEmpty()){
+            textViewGithubName.setText(name);
         } else {
-            textViewGithubUsername.setText("Uuuuh, you got no username");
+            textViewGithubName.setText("Uuuuh, you got no name");
         }
         if (email != null && !email.isEmpty()){
             textViewGithubEmail.setText(email);
