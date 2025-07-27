@@ -1,5 +1,6 @@
 package ca.scooter.androidpractice;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -107,11 +109,37 @@ public class HomeScreen extends AppCompatActivity {
                     //display defualts when everything is null
                     updateUI(null, null, null);
                 }
+            } else {
+                Toast.makeText(HomeScreen.this, "Errors getting user data", Toast.LENGTH_LONG).show();
+                updateUI(null, null, null);
             }
         });
-        
-        private void updateUI(String username, String email, String avatarUrl){
-            
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void updateUI(String username, String email, String avatarUrl){
+        if (username != null && !username.isEmpty()){
+            textViewGithubUsername.setText(username);
+        } else {
+            textViewGithubUsername.setText("Uuuuh, you got no username");
+        }
+        if (email != null && !email.isEmpty()){
+            textViewGithubEmail.setText(email);
+        } else {
+            textViewGithubEmail.setText("Uuuuh, you got no email");
+        }
+        if (avatarUrl != null && !avatarUrl.isEmpty()){
+            Glide.with(this)
+                    .load(avatarUrl)
+                    .placeholder(R.mipmap.ic_launcher_round)
+                    .error(R.mipmap.ic_launcher_round)
+                    .circleCrop()
+                    .into(imageViewGithubAvatar);
+        } else {
+            Glide.with(this)
+                    .load(R.mipmap.ic_launcher_round)
+                    .circleCrop()
+                    .into(imageViewGithubAvatar);
         }
     }
 
