@@ -109,6 +109,10 @@ public class HomeScreen extends AppCompatActivity {
                 }
             }
         });
+        
+        private void updateUI(String username, String email, String avatarUrl){
+            
+        }
     }
 
     @Override
