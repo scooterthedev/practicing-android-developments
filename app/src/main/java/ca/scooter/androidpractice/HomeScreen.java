@@ -3,6 +3,7 @@ package ca.scooter.androidpractice;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
@@ -50,14 +51,7 @@ public class HomeScreen extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         setSupportActionBar(binding.appBarHomeScreen.toolbar);
-        binding.appBarHomeScreen.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
-                        .setAnchorView(R.id.fab).show();
-            }
-        });
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
@@ -87,6 +81,26 @@ public class HomeScreen extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_home_screen);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+
+            if (id == R.id.logout) {
+                Toast.makeText(this, "You've been signed out successfully!", Toast.LENGTH_LONG).show();
+                mAuth.signOut();
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+                drawer.closeDrawers();
+                return true;
+            }
+            boolean handled = NavigationUI.onNavDestinationSelected(item, navController);
+            if (handled){
+                drawer.closeDrawers();
+            }
+            return handled;
+        });
     }
 
     private void loadData(String userID){
