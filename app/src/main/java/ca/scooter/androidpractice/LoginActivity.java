@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.OAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.rpc.context.AttributeContext;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onSuccess(AuthResult authResult) {
                                     Log.d(TAG, "signInWithGithub(): onSuccess" + Objects.requireNonNull(authResult.getUser()).getDisplayName());
                                     Toast.makeText(LoginActivity.this, "Welcome " + authResult.getUser().getDisplayName(), Toast.LENGTH_SHORT).show();
-                                    userSave(authResult.getUser());
+                                    userSave(authResult.getUser(), authResult);
                                 }
                             })
                     .addOnFailureListener(
@@ -111,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(AuthResult authResult) {
                                     Log.d(TAG, "signInWithGithub(): onSuccess" + Objects.requireNonNull(authResult.getUser()).getDisplayName());
-                                    userSave(authResult.getUser());
+                                    userSave(authResult.getUser(), authResult);
                                 }
                             })
                     .addOnFailureListener(
@@ -124,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
             });
         }
     }
-    private void userSave(FirebaseUser firebaseUser){
+    private void userSave(FirebaseUser firebaseUser, AuthResult authResult){
         if (firebaseUser == null){
             return;
         }
@@ -135,10 +136,18 @@ public class LoginActivity extends AppCompatActivity {
         Uri photoUri = firebaseUser.getPhotoUrl();
         String photoUrl = (photoUri != null) ? photoUri.toString() : null;
 
+        String githubUsername = null;
+        if (authResult.getAdditionalUserInfo() != null && authResult.getAdditionalUserInfo().getUsername() != null){
+            githubUsername = authResult.getAdditionalUserInfo().getUsername();
+        } else {
+            Toast.makeText(this, "Uhh, you don't have a gh username", Toast.LENGTH_LONG).show();
+        }
+
         Map<String, Object> user = new HashMap<>();
         user.put("name", name);
         user.put("email", email);
         user.put("avatarUrl", photoUrl);
+        user.put("githubUsername", githubUsername);
 
         DocumentReference userDocRef = db.collection("users").document(userID);
         userDocRef.set(user)
