@@ -9,5 +9,5 @@ data class Repository(
         val last_commit: String,
         val commit_date: String,
         val lang: String,
-        val stars: String,
+        val stars: String
         )

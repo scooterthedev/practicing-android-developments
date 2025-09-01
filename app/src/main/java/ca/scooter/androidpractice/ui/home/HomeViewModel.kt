@@ -49,7 +49,7 @@ class HomeViewModel(
             _isLoading.value = true
             _error.value = null
             try {
-                _repos.value = repoService.fetchRepos(currentUser)
+                _repos.value = repoService.fetchRepos(currentUser).getOrThrow()
             } catch (e: Exception){
                 _error.value = "${e.message}"
                 _repos.value = emptyList()
@@ -58,5 +58,4 @@ class HomeViewModel(
             }
         }
     }
-    }
-)
+}
