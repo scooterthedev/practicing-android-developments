@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:textSize="70px" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/login_gh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

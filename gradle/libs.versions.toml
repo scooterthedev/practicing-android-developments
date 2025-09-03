@@ -5,7 +5,7 @@ comGoogleGmsGoogleServicesGradlePlugin = "4.4.3"
 compiler = "4.16.0"
 composeBom = "2025.07.00"
 coreSplashscreen = "1.0.1"
-firebaseBom = "34.0.0"
+firebaseBom = "34.2.0"
 firebaseFirestore = "26.0.0"
 glide = "4.16.0"
 junit = "4.13.2"
@@ -41,6 +41,8 @@ lifecycleViewmodelKtxVersion = "2.7.0"
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityComposeVersion" }
 androidx-adaptive = { module = "androidx.compose.material3.adaptive:adaptive" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelComposeVersion" }
 androidx-material = { module = "androidx.compose.material:material" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }

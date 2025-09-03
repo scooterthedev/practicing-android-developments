@@ -1,40 +1,29 @@
-package ca.scooter.androidpractice.ui.home;
+package ca.scooter.androidpractice.ui.home
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.ComposeView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.FlowLiveDataConversions;
+class HomeFragment : Fragment() {
 
-import ca.scooter.androidpractice.databinding.FragmentHomeBinding;
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
-public class HomeFragment extends Fragment {
-
-    private FragmentHomeBinding binding;
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textHome;
-        FlowLiveDataConversions.asLiveData(homeViewModel.getRepos()).observe(getViewLifecycleOwner(), repos -> {
-            textView.setText(repos.toString());
-        });
-        return root;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+        return ComposeView(requireContext()).apply {
+            setContent {
+                val repos by homeViewModel.repos.collectAsState(initial = emptyList())
+                RepoList(repos = repos)
+            }
+        }
     }
 }
