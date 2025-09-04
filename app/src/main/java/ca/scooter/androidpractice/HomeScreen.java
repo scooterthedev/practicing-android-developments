@@ -72,7 +72,7 @@ public class HomeScreen extends AppCompatActivity {
             return;
         }
 
-        // Passing each menu ID as a set of Ids because each
+        // Passing each menu ID as a set of Ids because eac
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
