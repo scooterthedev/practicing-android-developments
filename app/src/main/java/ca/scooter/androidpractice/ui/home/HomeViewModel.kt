@@ -18,7 +18,7 @@ class GithubRepoService : RepoService {
         return if (user != null){
             Result.success(
                 listOf(
-                    Repository(1, "Test", "Test", "Test", "Test", "Test", "Test", "Test", "Test")
+                    Repository(1, "Test", "Test", "Test")
                 )
             )
         } else {

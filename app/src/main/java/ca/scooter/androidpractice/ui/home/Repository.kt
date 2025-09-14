@@ -1,13 +1,12 @@
 package ca.scooter.androidpractice.ui.home
 
+import com.google.firebase.firestore.PropertyName
+
 data class Repository(
-        val id: Long,
-        val name: String,
-        val description: String,
-        val url: String,
-        val owner: String,
-        val last_commit: String,
-        val commit_date: String,
-        val lang: String,
-        val stars: String
-        )
+    val id: Long = 0,
+    val name: String = "",
+    val description: String? = null,
+    @get:PropertyName("html_url") @set:PropertyName("html_url") var htmlUrl: String = "",
+    val stars: Int = 0,
+    val forks: Int = 0,
+)
