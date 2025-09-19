@@ -1,12 +1,14 @@
 package ca.scooter.androidpractice.ui.home
 
-import com.google.firebase.firestore.PropertyName
+import com.google.firebase.firestore.IgnoreExtraProperties
 
+@IgnoreExtraProperties
 data class Repository(
-    val id: Long = 0,
-    val name: String = "",
-    val description: String? = null,
-    @get:PropertyName("html_url") @set:PropertyName("html_url") var htmlUrl: String = "",
-    val stars: Int = 0,
-    val forks: Int = 0,
-)
+    var id: Long = 0L,
+    var name: String = "",
+    var html_url: String = "",
+    var description: String? = null,
+    var stargazers_count: Int = 0
+) {
+    constructor() : this(0L, "", "", null, 0)
+}
