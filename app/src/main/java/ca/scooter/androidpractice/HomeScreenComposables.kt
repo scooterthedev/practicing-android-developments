@@ -67,7 +67,6 @@ object AppDestinations {
 @Composable
 fun UserInfoHeader(
     name: String?,
-    email: String?,
     avatarUrl: String?,
     githubUserName: String?
 ) {
@@ -96,11 +95,13 @@ fun UserInfoHeader(
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = email ?: "Loading...",
-            style = MaterialTheme.typography.bodySmall,
-            textAlign = TextAlign.Center
-        )
+        if (githubUserName == "scooterthedev") {
+            Text(
+                text = "no leeks",
+                style = MaterialTheme.typography.bodySmall,
+                textAlign = TextAlign.Center
+            )
+        }
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = "GitHub: ${githubUserName ?: "Loading GitHub..."}",
@@ -122,14 +123,12 @@ fun AppDrawerContent(
     val currentRoute = navBackStackEntry?.destination?.route
 
     val displayName by homeViewModel.displayName.collectAsState()
-    val userEmail by homeViewModel.userEmail.collectAsState()
     val userAvatarUrl by homeViewModel.userAvatarUrl.collectAsState()
     val githubUserName by homeViewModel.githubUserName.collectAsState()
 
     ModalDrawerSheet {
         UserInfoHeader(
             name = displayName,
-            email = userEmail,
             avatarUrl = userAvatarUrl,
             githubUserName = githubUserName
         )
@@ -252,11 +251,10 @@ fun MainAppScreen(
                     } else {
                         RepoList(
                             repos = repos,
-                            onRepoClick = { /* No action on click anymore */ }
+                            onRepoClick = { }
                         )
                     }
                 }
-                // composable for REPO_DETAIL_ROUTE has been removed
             }
         }
     }
