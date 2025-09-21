@@ -11,8 +11,8 @@ android {
 
     defaultConfig {
         applicationId "ca.scooter.androidpractice"
-        minSdk 28
-        targetSdk 33
+        minSdk 30
+        targetSdk 36
         versionCode 1
         versionName "1.0"
 
@@ -89,7 +89,6 @@ dependencies {
     implementation libs.androidx.ui.tooling.preview
     debugImplementation libs.androidx.ui.tooling
 
-    androidTestImplementation libs.androidx.compose.ui.test.junit4
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     
     implementation libs.androidx.adaptive
