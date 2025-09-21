@@ -22,7 +22,7 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
         dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
-        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        litora torquent per conubia nostra, per inceptos himaleaneos. Suspendisse blandit eleifend
         diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
         ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
         Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
@@ -65,4 +65,11 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="view_logs_button">View Logs</string>
+    <string name="login_logs_dialog_title">Login Activity Logs</string>
+    <string name="save_logs_button">Save Logs</string>
+    <string name="logs_saved_success">Logs saved to: %1$s</string>
+    <string name="logs_saved_failed">Failed to save logs.</string>
+    <string name="no_logs_available">No logs available yet.</string>
 </resources>
