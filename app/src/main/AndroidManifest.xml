@@ -15,7 +15,15 @@
         android:theme="@style/Theme.AndroidPractice">
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="ca.scooter.androidpractice"
+                      android:host="firebase.auth" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".HomeScreen"
             android:exported="false"
