@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace 'ca.scooter.androidpractice'
-    compileSdk 36
+    compileSdk 35
 
     defaultConfig {
         applicationId "ca.scooter.androidpractice"
         minSdk 30
-        targetSdk 36
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
